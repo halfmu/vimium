@@ -991,6 +991,12 @@ var LocalHints = {
     if (!isClickable && className && className.toLowerCase().includes("button"))
       possibleFalsePositive = isClickable = true;
 
+    // for aws sso page
+    if(window.location.href.indexOf("awsapps.com") > -1) {
+      if (!isClickable && ( tagName === "portal-application" || (className && className.toLowerCase().includes("ng-trigger"))))
+        possibleFalsePositive = isClickable = true;
+    }
+
     // Elements with tabindex are sometimes useful, but usually not. We can treat them as second class
     // citizens when it improves UX, so take special note of them.
     const tabIndexValue = element.getAttribute("tabindex");
